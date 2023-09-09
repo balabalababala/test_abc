@@ -7,9 +7,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:scrollbars="vertical"
-    tools:context=".ScrollingActivity"
-    >
 
+    >
 
 
     <LinearLayout
@@ -23,6 +22,20 @@
         android:background="#81BEF7"
 
         >
+        <TextView
+            android:id="@+id/text_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <Button
             android:id="@+id/button71"
@@ -30,15 +43,18 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dip"
             android:clickable="true"
-            android:onClick="startMain"
             android:text="Button71" />
 
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
         <WebView
             android:id="@+id/my_webview"
             android:layout_width="match_parent"
-            android:layout_height="500dp" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
-
 </ScrollView>
