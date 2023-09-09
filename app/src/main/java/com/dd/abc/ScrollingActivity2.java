@@ -1,10 +1,9 @@
 package com.dd.abc;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -13,65 +12,35 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.RadioGroup;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import com.dd.abc.databinding.ActivityMainBinding;
+import com.dd.abc.databinding.ActivityScrollingBinding;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity implements Button.OnClickListener, RadioGroup.OnCheckedChangeListener {
-    private MediaPlayer mediaPlayer = null;
-    private boolean isReady = false;
+public class ScrollingActivity2 extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    private ActivityScrollingBinding binding;
+
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-//        Intent intent = new Intent(this, MusicService.class);
-//        startService(intent);
 
+        setContentView(R.layout.activity_scrolling2);
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.three_person_time);
-
-        mediaPlayer.stop();
-        mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-            @Override
-            public boolean onError(MediaPlayer mp, int what, int extra) {
-                mp.release();
-                //stopSelf();
-                return false;
-            }
-        });
-
-        try {
-            mediaPlayer.prepare();
-            isReady = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            isReady = false;
-        }
-
-        if (isReady) {
-            //将背景音乐设置为循环播放
-            mediaPlayer.setLooping(true);
-//            mediaPlayer.start();
-        }
+//        binding = ActivityScrollingBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
+//
 
 
 
 
 
-        WebView webView = findViewById(R.id.my_webview);
+//        WebView webView = binding.myWebview;
+
+         webView = findViewById(R.id.my_webview);
 
         if (savedInstanceState != null && false) {
 
@@ -160,63 +129,22 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 //        setContentView(webView2);
 
         }
-
-
+        Intent intent = getIntent();
+        String string = intent.getStringExtra("extra_data");
+        Log.w("*******",string);
     }
-
-
-    public void startNewActivity(View v){
+    public void startMain(View v){
         Intent intent = new Intent();
-        intent.setClassName("com.dd.abc","com.dd.abc.ScrollingActivity");
+        intent.setClassName("com.dd.abc","com.dd.abc.MainActivity");
         intent.putExtra("extra_data", "Hello World");
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 
-    @Override
-    public void onClick(View v) {
-
-        if (v.getId() == R.id.btn_start) {
-            if (!mediaPlayer.isPlaying()) {
-                //播放音乐
-                mediaPlayer.start();
-            }
-        } else if (v.getId() == R.id.btn_stop) {
-            //停止播放音乐
-           mediaPlayer.pause();
-            //退出当前Activity
-//            this.finish();
-        }
-    }
-
-
-
-    public void startService(View v) {
-
-//        if (v.getId() == R.id.btn_start) {
-//            //播放背景音乐
-//            Intent intent2 = new Intent(this, MusicService.class);
-//            startService(intent2);
-//            //退出当前Activity
-//            this.finish();
-//        } else if (v.getId() == R.id.btn_stop) {
-//            //停止播放音乐
-//            Intent intent2 = new Intent(this, MusicService.class);
-//            stopService(intent2);
-//        }
-    }
-
 
     @Override
-    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-        switch (i){
-            case R.id.radioButton:
-                break;
-            case R.id.radioButton2:
-                break;
-        }
+    protected void onSaveInstanceState(Bundle outState) {
+        webView.saveState(outState);
+        super.onSaveInstanceState(outState);
     }
 }
-
-
-

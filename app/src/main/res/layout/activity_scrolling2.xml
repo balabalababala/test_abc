@@ -7,7 +7,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:scrollbars="vertical"
-    tools:context=".ScrollingActivity"
+    tools:context=".ScrollingActivity2"
     >
 
 
@@ -31,7 +31,7 @@
             android:layout_margin="10dip"
             android:clickable="true"
             android:onClick="startMain"
-            android:text="startActivity2" />
+            android:text="StartMain" />
 
 
         <WebView

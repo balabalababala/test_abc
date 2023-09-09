@@ -27,20 +27,25 @@ public class ScrollingActivity extends AppCompatActivity {
 
     private ActivityScrollingBinding binding;
 
+    private WebView webView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityScrollingBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_scrolling);
 
-        View root = binding.getRoot();
-
-
-
+//        binding = ActivityScrollingBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
+//
 
 
-        WebView webView = binding.myWebview;
+
+
+
+//        WebView webView = binding.myWebview;
+
+         webView = findViewById(R.id.my_webview);
 
         if (savedInstanceState != null && false) {
 
@@ -135,8 +140,16 @@ public class ScrollingActivity extends AppCompatActivity {
     }
     public void startMain(View v){
         Intent intent = new Intent();
-        intent.setClassName("com.dd.abc","com.dd.abc.MainActivity");
+        intent.setClassName("com.dd.abc","com.dd.abc.ScrollingActivity2");
         intent.putExtra("extra_data", "Hello World");
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        webView.saveState(outState);
+        super.onSaveInstanceState(outState);
     }
 }
